@@ -23,7 +23,6 @@ hs_err_pid*
 
 # Netbeans
 nbproject/
-dist/
 manifest.mf
 build.xml
 build/

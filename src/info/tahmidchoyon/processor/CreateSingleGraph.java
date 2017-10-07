@@ -20,7 +20,7 @@ import org.graphstream.graph.implementations.SingleGraph;
  */
 public class CreateSingleGraph {
 
-    private static final long DEFAULT_THREAD_SLEEP_TIME = 250L;
+    private static final long DEFAULT_THREAD_SLEEP_TIME = 5L; //qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789`~!@#$%^&*()_+-={}|[]\:";'<>?,./
 
     private String nodeString;
     private Graph graph;
@@ -47,6 +47,7 @@ public class CreateSingleGraph {
         for (int i = 0; i < str.length(); i++) {
             for (int j = i + 1; j < str.length(); j++) {
                 graph.addEdge("" + str.charAt(i) + str.charAt(j), "" + str.charAt(i), "" + str.charAt(j));
+                System.out.println("Edge: " + str.charAt(i) + " -> " + str.charAt(j));
                 try {
                     Thread.sleep(DEFAULT_THREAD_SLEEP_TIME);
                 } catch (InterruptedException ex) {
@@ -88,6 +89,17 @@ public class CreateSingleGraph {
             sb.append(alphabets.charAt(random.nextInt(alphabets.length())));
         }
         return sb.toString();
+    }
+
+    public void createGraph(CreateSingleGraph createSingleGraph, String str) {
+        if (graph.getNode(str) == null) {
+            createSingleGraph.graph.addNode(str);
+            graph.getNodeSet().forEach((node) -> {
+                if (!node.getId().equals(str)) {
+                    graph.addEdge(node.getId() + str, node.getId(), str);
+                }
+            });
+        }
     }
 
 }

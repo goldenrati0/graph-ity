@@ -18,6 +18,7 @@ public class LandingWindow extends javax.swing.JFrame {
 
     private static boolean isClicked = false;
     private static CreateMultiGraph createMultiGraph;
+    private static String stringAsNode = "";
 
     /**
      * Creates new form LandingWindow
@@ -129,7 +130,6 @@ public class LandingWindow extends javax.swing.JFrame {
         new Thread(() -> {
             String nodeString = nodesAsStringTextField.getText();
             if (multiGraphCheckBox.isSelected()) {
-                isClicked = true;
                 CreateMultiGraph multiGraph = new CreateMultiGraph(nodeString);
                 multiGraph.createGraph();
                 createMultiGraph = multiGraph.getGraph();
@@ -186,13 +186,16 @@ public class LandingWindow extends javax.swing.JFrame {
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
-
+                    String temp = stringAsNode.replaceAll(nodesAsStringTextField.getText(), "");
+                    createMultiGraph.removeNode(temp);
+                    stringAsNode = nodesAsStringTextField.getText();
                 }
 
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if (isClicked) {
-                        System.out.println("Inset Update");
+                        stringAsNode = nodesAsStringTextField.getText();
+                        System.out.print("New Node -> ");
                         createMultiGraph.createGraph(createMultiGraph, "" + nodesAsStringTextField.getText().charAt(nodesAsStringTextField.getText().length() - 1));
                         System.out.println(nodesAsStringTextField.getText().charAt(nodesAsStringTextField.getText().length() - 1));
                     }

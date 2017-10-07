@@ -19,22 +19,22 @@ import org.graphstream.graph.implementations.MultiGraph;
  * @author tahmid
  */
 public class CreateMultiGraph {
-    
-    private static final long DEFAULT_THREAD_SLEEP_TIME = 250L;
-    
+
+    private static final long DEFAULT_THREAD_SLEEP_TIME = 5L;
+
     private String nodeString;
     private Graph graph;
-    
+
     public CreateMultiGraph(String nodeString) {
         this.nodeString = nodeString;
     }
-    
+
     public void createGraph() {
         String str = removeDuplicate(toCharacterArray(nodeString));
         graph = new MultiGraph(getRandomString(10));
-        
+
         graph.display();
-        
+
         for (int i = 0; i < str.length(); i++) {
             graph.addNode(String.valueOf(str.charAt(i)));
             try {
@@ -43,7 +43,7 @@ public class CreateMultiGraph {
                 Logger.getLogger(CreateSingleGraph.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         for (int i = 0; i < str.length(); i++) {
             for (int j = 0; j < str.length(); j++) {
                 graph.addEdge("" + str.charAt(i) + str.charAt(j), "" + str.charAt(i), "" + str.charAt(j));
@@ -56,7 +56,7 @@ public class CreateMultiGraph {
             }
         }
     }
-    
+
     private String removeDuplicate(Character[] charArray) {
         Set<Character> charSet = new HashSet<>(Arrays.asList(charArray));
         StringBuilder stringBuilder = new StringBuilder("");
@@ -65,7 +65,7 @@ public class CreateMultiGraph {
         });
         return stringBuilder.toString();
     }
-    
+
     private Character[] toCharacterArray(String str) {
         char[] tempCharArray = str.toCharArray();
         Character[] characters = new Character[tempCharArray.length];
@@ -74,7 +74,7 @@ public class CreateMultiGraph {
         }
         return characters;
     }
-    
+
     private String getRandomString(int length) {
         String alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         Random random = new Random();
@@ -84,11 +84,11 @@ public class CreateMultiGraph {
         }
         return sb.toString();
     }
-    
+
     public CreateMultiGraph getGraph() {
         return this;
     }
-    
+
     public void createGraph(CreateMultiGraph createMultiGraph, String str) {
         if (graph.getNode(str) == null) {
             createMultiGraph.graph.addNode(str);
@@ -97,6 +97,12 @@ public class CreateMultiGraph {
                     graph.addEdge(node.getId() + str, node.getId(), str);
                 }
             });
+        }
+    }
+
+    public void removeNode(String node) {
+        if (graph.getNode(node) != null) {
+            graph.removeNode(node);
         }
     }
 }
