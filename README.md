@@ -1,5 +1,5 @@
 # graph-ity
-A tool for **Graph Visualization** purely in **`Java`**
+A tool for **Graph Visualization** purely written in **`Java`**
 
 ![graph-ity GIF](https://github.com/tahmid-choyon/graph-ity/raw/master/demo/demogit.gif)
 
