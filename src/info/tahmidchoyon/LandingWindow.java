@@ -7,8 +7,6 @@ package info.tahmidchoyon;
 
 import info.tahmidchoyon.processor.CreateMultiGraph;
 import info.tahmidchoyon.processor.CreateSingleGraph;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 /**
  *
@@ -16,9 +14,9 @@ import javax.swing.event.DocumentListener;
  */
 public class LandingWindow extends javax.swing.JFrame {
 
-    private static boolean isClicked = false;
-    private static CreateMultiGraph createMultiGraph;
-    private static String stringAsNode = "";
+    private CreateMultiGraph createMultiGraph;
+    private CreateSingleGraph createSingleGraph;
+    private static int graphType = 0;
 
     /**
      * Creates new form LandingWindow
@@ -37,10 +35,12 @@ public class LandingWindow extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        singleGraphButotn = new javax.swing.JButton();
+        addNodeButton = new javax.swing.JButton();
+        removeNodeButton = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        nodesAsStringTextField = new javax.swing.JTextField();
-        multiGraphCheckBox = new javax.swing.JCheckBox();
-        createGraphButton = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        multiGraphButton = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Generate Graph");
@@ -49,27 +49,40 @@ public class LandingWindow extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Graph Stream"));
 
-        jLabel1.setText("Nodes as String (e.g. ABCD)");
-
-        nodesAsStringTextField.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                nodesAsStringTextFieldInputMethodTextChanged(evt);
-            }
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-        });
-        nodesAsStringTextField.addActionListener(new java.awt.event.ActionListener() {
+        singleGraphButotn.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        singleGraphButotn.setText("SINGLE GRAPH");
+        singleGraphButotn.setToolTipText("Create a graph with five nodes!");
+        singleGraphButotn.setEnabled(false);
+        singleGraphButotn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nodesAsStringTextFieldActionPerformed(evt);
+                singleGraphButotnActionPerformed(evt);
             }
         });
 
-        multiGraphCheckBox.setText("Create Multigraph (Undirected multi edged graph)");
-
-        createGraphButton.setText("Create Graph");
-        createGraphButton.addActionListener(new java.awt.event.ActionListener() {
+        addNodeButton.setText("+");
+        addNodeButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                createGraphButtonActionPerformed(evt);
+                addNodeButtonActionPerformed(evt);
+            }
+        });
+
+        removeNodeButton.setText("-");
+        removeNodeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeNodeButtonActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("ADD NODE");
+
+        jLabel2.setText("REMOVE NODE");
+
+        multiGraphButton.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        multiGraphButton.setText("MULTI GRAPH");
+        multiGraphButton.setToolTipText("Create a graph with five nodes!");
+        multiGraphButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                multiGraphButtonActionPerformed(evt);
             }
         });
 
@@ -78,26 +91,40 @@ public class LandingWindow extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(multiGraphCheckBox, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1)
-                    .addComponent(createGraphButton)
-                    .addComponent(nodesAsStringTextField))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(191, 191, 191)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(addNodeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(removeNodeButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(singleGraphButotn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
+                        .addComponent(multiGraphButton)))
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nodesAsStringTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(multiGraphCheckBox)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(createGraphButton)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(singleGraphButotn, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(multiGraphButton, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addNodeButton)
+                    .addComponent(jLabel1))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(removeNodeButton)
+                    .addComponent(jLabel2))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -120,29 +147,44 @@ public class LandingWindow extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nodesAsStringTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nodesAsStringTextFieldActionPerformed
+    private void singleGraphButotnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_singleGraphButotnActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nodesAsStringTextFieldActionPerformed
+    }//GEN-LAST:event_singleGraphButotnActionPerformed
 
-    private void createGraphButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_createGraphButtonActionPerformed
+    private void multiGraphButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_multiGraphButtonActionPerformed
         // TODO add your handling code here:
-        isClicked = true;
-        new Thread(() -> {
-            String nodeString = nodesAsStringTextField.getText();
-            if (multiGraphCheckBox.isSelected()) {
-                CreateMultiGraph multiGraph = new CreateMultiGraph(nodeString);
-                multiGraph.createGraph();
-                createMultiGraph = multiGraph.getGraph();
-            } else {
-                CreateSingleGraph singleGraph = new CreateSingleGraph(nodeString);
-                singleGraph.createGraph();
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                graphType = 2;
+                createMultiGraph = new CreateMultiGraph();
             }
         }).start();
-    }//GEN-LAST:event_createGraphButtonActionPerformed
 
-    private void nodesAsStringTextFieldInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_nodesAsStringTextFieldInputMethodTextChanged
+    }//GEN-LAST:event_multiGraphButtonActionPerformed
 
-    }//GEN-LAST:event_nodesAsStringTextFieldInputMethodTextChanged
+    private void addNodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addNodeButtonActionPerformed
+        // TODO add your handling code here:
+        if (graphType == 2) {
+            createMultiGraph.addNode();
+        } else if (graphType == 1) {
+            // Add node to Single Graph
+        }
+    }//GEN-LAST:event_addNodeButtonActionPerformed
+
+    private void removeNodeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeNodeButtonActionPerformed
+        // TODO add your handling code here:
+
+        if (graphType == 1) {
+            if (createSingleGraph != null && createSingleGraph.getNodeNumber() >= 1) {
+                createSingleGraph.removeNode();
+            }
+        } else if (graphType == 2) {
+            if (createMultiGraph != null && createMultiGraph.getNodeNumber() >= 1) {
+                createMultiGraph.removeNode();
+            }
+        }
+    }//GEN-LAST:event_removeNodeButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,41 +216,16 @@ public class LandingWindow extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             new LandingWindow().setVisible(true);
-
-            nodesAsStringTextField.getDocument().addDocumentListener(new DocumentListener() {
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    if (isClicked) {
-                        System.out.println("Changed Updates");
-                        createMultiGraph.createGraph(createMultiGraph, nodesAsStringTextField.getText());
-                    }
-                }
-
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    String temp = stringAsNode.replaceAll(nodesAsStringTextField.getText(), "");
-                    createMultiGraph.removeNode(temp);
-                    stringAsNode = nodesAsStringTextField.getText();
-                }
-
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    if (isClicked) {
-                        stringAsNode = nodesAsStringTextField.getText();
-                        System.out.print("New Node -> ");
-                        createMultiGraph.createGraph(createMultiGraph, "" + nodesAsStringTextField.getText().charAt(nodesAsStringTextField.getText().length() - 1));
-                        System.out.println(nodesAsStringTextField.getText().charAt(nodesAsStringTextField.getText().length() - 1));
-                    }
-                }
-            });
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton createGraphButton;
+    private javax.swing.JButton addNodeButton;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JCheckBox multiGraphCheckBox;
-    private static javax.swing.JTextField nodesAsStringTextField;
+    private javax.swing.JButton multiGraphButton;
+    private javax.swing.JButton removeNodeButton;
+    private javax.swing.JButton singleGraphButotn;
     // End of variables declaration//GEN-END:variables
 }
