@@ -1,7 +1,8 @@
 # graph-ity
 A tool for **Graph Visualization** purely written in **`Java`**
 
-![graph-ity GIF](https://github.com/tahmid-choyon/graph-ity/raw/master/demo/demogit.gif)
+## Current Status
+![graph-ity GIF](https://github.com/tahmid-choyon/graph-ity/raw/master/demo/status.gif)
 
 ### Dependencies
 * [gs-core](https://github.com/graphstream/gs-core)
