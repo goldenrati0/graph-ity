@@ -5,12 +5,7 @@
  */
 package info.tahmidchoyon.processor;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.SingleGraph;
 
@@ -22,63 +17,19 @@ public class CreateSingleGraph {
 
     private static final long DEFAULT_THREAD_SLEEP_TIME = 5L; //qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789`~!@#$%^&*()_+-={}|[]\:";'<>?,./
 
-    private String nodeString;
     private Graph graph;
+    private int nodeNumber;
 
-    public CreateSingleGraph(String nodeString) {
-        this.nodeString = nodeString;
+    public CreateSingleGraph() {
+        this.graph = new SingleGraph(getRandomString(10));
     }
 
-    public void createGraph() {
-        String str = removeDuplicate(toCharacterArray(nodeString));
-        graph = new SingleGraph(getRandomString(10));
-
-        graph.display();
-
-        for (int i = 0; i < str.length(); i++) {
-            graph.addNode(String.valueOf(str.charAt(i)));
-            try {
-                Thread.sleep(DEFAULT_THREAD_SLEEP_TIME);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(CreateSingleGraph.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
-
-        for (int i = 0; i < str.length(); i++) {
-            for (int j = i + 1; j < str.length(); j++) {
-                graph.addEdge("" + str.charAt(i) + str.charAt(j), "" + str.charAt(i), "" + str.charAt(j));
-                System.out.println("Edge: " + str.charAt(i) + " -> " + str.charAt(j));
-                try {
-                    Thread.sleep(DEFAULT_THREAD_SLEEP_TIME);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(CreateSingleGraph.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-        }
-    }
-
-    private String removeDuplicate(Character[] charArray) {
-        Set<Character> charSet = new HashSet<>(Arrays.asList(charArray));
-        StringBuilder stringBuilder = new StringBuilder("");
-        charSet.forEach((c) -> {
-            stringBuilder.append(c);
-        });
-        return stringBuilder.toString();
-    }
-
-    private Character[] toCharacterArray(String str) {
-        char[] tempCharArray = str.toCharArray();
-        Character[] characters = new Character[tempCharArray.length];
-        for (int i = 0; i < tempCharArray.length; i++) {
-            characters[i] = (Character) tempCharArray[i];
-        }
-        return characters;
-    }
-
-    public Graph getGraph() {
-        graph = new SingleGraph(getRandomString(10));
-        graph.display();
-        return graph;
+    /**
+     * Removes the last added node from graph
+     */
+    public void removeNode() {
+        graph.removeNode(String.valueOf(--nodeNumber));
+        System.out.println("Node Removed -> " + nodeNumber);
     }
 
     private String getRandomString(int length) {
@@ -91,15 +42,7 @@ public class CreateSingleGraph {
         return sb.toString();
     }
 
-    public void createGraph(CreateSingleGraph createSingleGraph, String str) {
-        if (graph.getNode(str) == null) {
-            createSingleGraph.graph.addNode(str);
-            graph.getNodeSet().forEach((node) -> {
-                if (!node.getId().equals(str)) {
-                    graph.addEdge(node.getId() + str, node.getId(), str);
-                }
-            });
-        }
+    public int getNodeNumber() {
+        return this.nodeNumber;
     }
-
 }

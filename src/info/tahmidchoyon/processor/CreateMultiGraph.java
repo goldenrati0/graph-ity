@@ -5,12 +5,10 @@
  */
 package info.tahmidchoyon.processor;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Random;
-import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import org.graphstream.graph.Graph;
 import org.graphstream.graph.implementations.MultiGraph;
 
@@ -20,59 +18,59 @@ import org.graphstream.graph.implementations.MultiGraph;
  */
 public class CreateMultiGraph {
 
-    private static final long DEFAULT_THREAD_SLEEP_TIME = 5L;
+    private static final long DEFAULT_THREAD_SLEEP_TIME = 250L;
 
-    private String nodeString;
+    private int nodeNumber;
     private Graph graph;
 
-    public CreateMultiGraph(String nodeString) {
-        this.nodeString = nodeString;
+    /**
+     * Constructor with no parameter. Create new MultiGraph object Adds some
+     * nodes and creates edges among them
+     */
+    public CreateMultiGraph() {
+        this.graph = new MultiGraph(getRandomString(10));
+        graph.display();
+        nodeNumber = 0;
+        addInitialNodes();
     }
 
-    public void createGraph() {
-        String str = removeDuplicate(toCharacterArray(nodeString));
-        graph = new MultiGraph(getRandomString(10));
+    /**
+     * Adds a new node to the graph
+     */
+    public void addNode() {
+        this.graph.addNode(String.valueOf(nodeNumber));
+        System.out.println(String.valueOf("Node Added -> " + nodeNumber));
+        graph.getNodeSet().forEach((node) -> {
+            if (!node.getId().equals(String.valueOf(nodeNumber))) {
+                graph.addEdge("" + node.getId() + nodeNumber + getRandomString(25), node, graph.getNode(String.valueOf(nodeNumber)));
+            }
+        });
+        nodeNumber++;
+    }
 
-        graph.display();
+    /**
+     * Removes the last added node from graph
+     */
+    public void removeNode() {
+        graph.removeNode(String.valueOf(--nodeNumber));
+        System.out.println("Node Removed -> " + (nodeNumber));
+    }
 
-        for (int i = 0; i < str.length(); i++) {
-            graph.addNode(String.valueOf(str.charAt(i)));
+    private void addInitialNodes() {
+        for (; nodeNumber < 10; nodeNumber++) {
+            this.graph.addNode(String.valueOf(nodeNumber));
+            System.out.println(String.valueOf("Node Added -> " + nodeNumber));
             try {
                 Thread.sleep(DEFAULT_THREAD_SLEEP_TIME);
             } catch (InterruptedException ex) {
-                Logger.getLogger(CreateSingleGraph.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(CreateMultiGraph.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-
-        for (int i = 0; i < str.length(); i++) {
-            for (int j = 0; j < str.length(); j++) {
-                graph.addEdge("" + str.charAt(i) + str.charAt(j), "" + str.charAt(i), "" + str.charAt(j));
-                System.out.println("EDGE: " + str.charAt(i) + " -> " + str.charAt(j));
-                try {
-                    Thread.sleep(DEFAULT_THREAD_SLEEP_TIME);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(CreateSingleGraph.class.getName()).log(Level.SEVERE, null, ex);
+            graph.getNodeSet().forEach((node) -> {
+                if (!node.getId().equals(String.valueOf(nodeNumber))) {
+                    graph.addEdge("" + node.getId() + nodeNumber + getRandomString(15), node, graph.getNode(String.valueOf(nodeNumber)));
                 }
-            }
+            });
         }
-    }
-
-    private String removeDuplicate(Character[] charArray) {
-        Set<Character> charSet = new HashSet<>(Arrays.asList(charArray));
-        StringBuilder stringBuilder = new StringBuilder("");
-        charSet.forEach((c) -> {
-            stringBuilder.append(c);
-        });
-        return stringBuilder.toString();
-    }
-
-    private Character[] toCharacterArray(String str) {
-        char[] tempCharArray = str.toCharArray();
-        Character[] characters = new Character[tempCharArray.length];
-        for (int i = 0; i < tempCharArray.length; i++) {
-            characters[i] = (Character) tempCharArray[i];
-        }
-        return characters;
     }
 
     private String getRandomString(int length) {
@@ -85,24 +83,12 @@ public class CreateMultiGraph {
         return sb.toString();
     }
 
-    public CreateMultiGraph getGraph() {
-        return this;
+    /**
+     *
+     * @return The current value of nodeNumber
+     */
+    public int getNodeNumber() {
+        return this.nodeNumber;
     }
 
-    public void createGraph(CreateMultiGraph createMultiGraph, String str) {
-        if (graph.getNode(str) == null) {
-            createMultiGraph.graph.addNode(str);
-            graph.getNodeSet().forEach((node) -> {
-                if (!node.getId().equals(str)) {
-                    graph.addEdge(node.getId() + str, node.getId(), str);
-                }
-            });
-        }
-    }
-
-    public void removeNode(String node) {
-        if (graph.getNode(node) != null) {
-            graph.removeNode(node);
-        }
-    }
 }
