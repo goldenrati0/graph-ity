@@ -41,6 +41,21 @@ public class MultiGraphCreator {
         return "Error: Invalid Node";
     }
 
+    public void starterPack() {
+        String nodes[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
+        for (String n : nodes) {
+            addNode(n);
+        }
+
+        for (String n : nodes) {
+            graph.getNodeSet().forEach((node) -> {
+                if (!node.getId().equals(n)) {
+                    graph.addEdge("" + node.getId() + n + getRandomString(15), node, graph.getNode(n));
+                }
+            });
+        }
+    }
+
     private String getRandomString(int length) {
         String alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         Random random = new Random();

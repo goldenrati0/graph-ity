@@ -22,15 +22,25 @@ public class Controller {
     public void onKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {
 
-            if (multiGraph == null) {
-                multiGraph = new MultiGraphCreator();
+            if (Controller.multiGraph == null) {
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        Controller.multiGraph = new MultiGraphCreator();
+                    }
+                }.run();
             }
 
             String response = execCommand(textArea.getText().split("\n")[textArea.getText().split("\n").length - 1]);
 
             if (!response.equals("ERROR! Invalid Command")) {
                 System.out.println(response);
-                listView.getItems().add(response);
+                if (response.equals("starterpack"))
+                    listView.getItems().add("10 Nodes added named from A to J and created edges among them");
+                else if (response.equals("help")) {
+
+                } else
+                    listView.getItems().add(response);
             } else {
                 System.out.println(response);
             }
@@ -45,6 +55,11 @@ public class Controller {
         } else if (Pattern.matches("^create_edge[(][\\w{1}]-{1}[\\w{1}][)]", command)) {
             String nodes[] = processStringNodes(command).split("-");
             return multiGraph.createEdge(nodes[0], nodes[1]);
+        } else if (Pattern.matches("^starterpack", command)) {
+            multiGraph.starterPack();
+            return "starterpack";
+        } else if (Pattern.matches("^help", command)) {
+            return "help";
         }
         return "ERROR! Invalid Command";
     }
