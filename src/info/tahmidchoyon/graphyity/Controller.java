@@ -39,6 +39,8 @@ public class Controller {
                     listView.getItems().add("10 Nodes added named from A to J and created edges among them");
                 else if (response.equals("help")) {
 
+                } else if (response.equals("random")) {
+                    listView.getItems().add("Random addition of nodes and edges");
                 } else
                     listView.getItems().add(response);
             } else {
@@ -58,8 +60,13 @@ public class Controller {
         } else if (Pattern.matches("^starterpack", command)) {
             multiGraph.starterPack();
             return "starterpack";
+        } else if (Pattern.matches("^random$", command)) {
+            multiGraph.randomStarterPack();
+            return "random";
         } else if (Pattern.matches("^help", command)) {
             return "help";
+        } else if (Pattern.matches("^del_all_nodes", command)) {
+            return multiGraph.removeAllNodes();
         }
         return "ERROR! Invalid Command";
     }
