@@ -56,6 +56,15 @@ public class MultiGraphCreator {
         return "Error: Invalid Node";
     }
 
+    public String deleteEdge(String edge) {
+        if (graph.getEdge(edge) != null) {
+            graph.removeEdge(edge);
+            return edge.concat(" Edge deleted");
+        } else {
+            return "Error: Invalid Edge";
+        }
+    }
+
     public void starterPack() {
         String nodes[] = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J"};
         for (String n : nodes) {
@@ -86,6 +95,16 @@ public class MultiGraphCreator {
             }
         }
 
+    }
+
+    public void randomSix() {
+        String nodes[] = {"a", "b", "c", "d", "e", "f"};
+        for (String n : nodes) {
+            addNode(n);
+        }
+        for (int i = 1; i < nodes.length; i++) {
+            createEdge("a", nodes[i]);
+        }
     }
 
     private String getRandomString(int length) {

@@ -1,7 +1,7 @@
 package info.tahmidchoyon.graphyity;
 
 import com.jfoenix.controls.JFXListView;
-import com.jfoenix.controls.JFXTextArea;
+import com.jfoenix.controls.JFXTextField;
 import info.tahmidchoyon.graphyity.processor.MultiGraphCreator;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyCode;
@@ -15,7 +15,10 @@ public class Controller {
     public JFXListView<String> listView;
 
     @FXML
-    public JFXTextArea textArea;
+    public JFXTextField textField;
+
+    @FXML
+    public JFXListView<String> commandHistoryListView;
 
     private static MultiGraphCreator multiGraph;
 
@@ -31,18 +34,14 @@ public class Controller {
                 }.run();
             }
 
-            String response = execCommand(textArea.getText().split("\n")[textArea.getText().split("\n").length - 1]);
+            String command = textField.getText();
+            String response = execCommand(command);
+            textField.clear();
+            commandHistoryListView.getItems().add(command);
 
             if (!response.equals("ERROR! Invalid Command")) {
                 System.out.println(response);
-                if (response.equals("starterpack"))
-                    listView.getItems().add("10 Nodes added named from A to J and created edges among them");
-                else if (response.equals("help")) {
-
-                } else if (response.equals("random")) {
-                    listView.getItems().add("Random addition of nodes and edges");
-                } else
-                    listView.getItems().add(response);
+                listView.getItems().add(response);
             } else {
                 System.out.println(response);
             }
@@ -59,19 +58,25 @@ public class Controller {
             return multiGraph.createEdge(nodes[0], nodes[1]);
         } else if (Pattern.matches("^starterpack", command)) {
             multiGraph.starterPack();
-            return "starterpack";
+            return "10 Nodes added named from A to J and created edges among them";
         } else if (Pattern.matches("^random$", command)) {
             multiGraph.randomStarterPack();
-            return "random";
+            return "Random addition of nodes and edges";
+        } else if (Pattern.matches("^randomsix$", command)) {
+            multiGraph.randomSix();
+            return "Nodes: a-f, edges towards \"a\" from others";
         } else if (Pattern.matches("^help", command)) {
-            return "help";
+            return "Help window (coming soon)";
         } else if (Pattern.matches("^del_all_nodes", command)) {
             return multiGraph.removeAllNodes();
+        } else if (Pattern.matches("^del_edge[(][\\w{1}]-{1}[\\w{1}][)]", command)) {
+            String nodes[] = processStringNodes(command).split("-");
+            return multiGraph.deleteEdge(nodes[0].concat(nodes[1]));
         }
         return "ERROR! Invalid Command";
     }
 
     private String processStringNodes(String command) {
-        return command.replace("create_edge", "").replaceAll("\\(", "").replaceAll("\\)", "");
+        return command.replace("create_edge", "").replaceAll("del_edge", "").replaceAll("\\(", "").replaceAll("\\)", "");
     }
 }
