@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/artifacts/graph_ity_jar/graph-ity.jar" afterPath="$PROJECT_DIR$/out/artifacts/graph_ity_jar/graph-ity.jar" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/tahmidchoyon/graphyity/Controller.java" afterPath="$PROJECT_DIR$/src/info/tahmidchoyon/graphyity/Controller.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/tahmidchoyon/graphyity/Main.java" afterPath="$PROJECT_DIR$/src/info/tahmidchoyon/graphyity/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/tahmidchoyon/graphyity/landing.fxml" afterPath="$PROJECT_DIR$/src/info/tahmidchoyon/graphyity/landing.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/info/tahmidchoyon/graphyity/processor/MultiGraphCreator.java" afterPath="$PROJECT_DIR$/src/info/tahmidchoyon/graphyity/processor/MultiGraphCreator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/graph-ity/info/tahmidchoyon/graphyity/landing.fxml" afterPath="$PROJECT_DIR$/out/production/graph-ity/info/tahmidchoyon/graphyity/landing.fxml" />
     </list>
     <ignored path="JavaFxApplication.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,7 +79,7 @@
       <file leaf-file-name="Controller.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/info/tahmidchoyon/graphyity/Controller.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
+            <state relative-caret-position="1134">
               <caret line="65" column="35" lean-forward="false" selection-start-line="65" selection-start-column="35" selection-end-line="65" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -94,7 +92,7 @@
         <entry file="file://$PROJECT_DIR$/src/info/tahmidchoyon/graphyity/processor/MultiGraphCreator.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="216">
-              <caret line="51" column="13" lean-forward="true" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
+              <caret line="51" column="13" lean-forward="false" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -216,6 +214,13 @@
               <item name="graph-ity" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="graphyity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="graph-ity" type="b2602c69:ProjectViewProjectNode" />
+              <item name="graph-ity" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="graphyity" type="462c0819:PsiDirectoryNode" />
+              <item name="algorithms" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="graph-ity" type="b2602c69:ProjectViewProjectNode" />
@@ -453,12 +458,20 @@
       <workItem from="1507655031311" duration="10899000" />
       <workItem from="1507719004847" duration="4826000" />
       <workItem from="1507738738103" duration="7089000" />
-      <workItem from="1509040313160" duration="3689000" />
+      <workItem from="1509040313160" duration="4064000" />
     </task>
+    <task id="LOCAL-00001" summary="UI Update, Controller Update, Delete Edge Function">
+      <created>1509044057823</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1509044057823</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="33086000" />
+    <option name="totallyTimeSpent" value="33461000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
@@ -472,7 +485,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32843137" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.41993463" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -508,6 +521,8 @@
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <MESSAGE value="UI Update, Controller Update, Delete Edge Function" />
+    <option name="LAST_COMMIT_MESSAGE" value="UI Update, Controller Update, Delete Edge Function" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -748,16 +763,24 @@
     <entry file="file://$PROJECT_DIR$/src/info/tahmidchoyon/graphyity/processor/MultiGraphCreator.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
-          <caret line="51" column="13" lean-forward="true" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
+          <caret line="51" column="13" lean-forward="false" selection-start-line="51" selection-start-column="13" selection-end-line="51" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/info/tahmidchoyon/graphyity/algorithms/BFS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="13" lean-forward="false" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/info/tahmidchoyon/graphyity/Controller.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
+        <state relative-caret-position="1134">
           <caret line="65" column="35" lean-forward="false" selection-start-line="65" selection-start-column="35" selection-end-line="65" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
